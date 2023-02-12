@@ -63,6 +63,15 @@ function App() {
 
   return (
     <div className="App">
+      <button
+        onClick={() => {
+          setInterval(() => {
+            runSimulation(grid)
+          }, 1000)
+        }}
+      >
+        Run
+      </button>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {grid &&
           grid.map((rows, i) =>
