@@ -1,5 +1,5 @@
 import './App.css'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 const cols = 30
 const rows = 30
@@ -31,12 +31,18 @@ console.log(randomGrid())
 
 function App() {
   const [grid, setGrid] = useState()
+  const [start, setStart] = useState(false)
+  const startRef = useRef(start)
+  startRef.current = start
 
   useEffect(() => {
     setGrid(randomGrid())
   }, [])
 
   function runSimulation() {
+    if (!startRef.current) {
+      return
+    }
     setGrid((g) => {
       const next = g.map((row, i) => {
         return row.map((cell, j) => {
@@ -65,12 +71,23 @@ function App() {
     <div className="App">
       <button
         onClick={() => {
+          setStart(!start)
+          if (!start) {
+            startRef.current = true
+          }
           setInterval(() => {
             runSimulation(grid)
           }, 1000)
         }}
       >
-        Run
+        {start ? 'Stop' : 'Start'}
+      </button>
+      <button
+        onClick={() => {
+          setGrid(randomGrid)
+        }}
+      >
+        Reset
       </button>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {grid &&
