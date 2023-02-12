@@ -1,7 +1,7 @@
 import './App.css'
 import React, { useState, useEffect, useRef } from 'react'
 
-const cols = 45
+const cols = 50
 const rows = 30
 
 const randomGrid = () => {
@@ -108,14 +108,21 @@ function App() {
       >
         Clear
       </button>
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: `repeat(${cols}, 24px)`,
+          width: 'fit-content',
+          margin: '0 auto',
+        }}
+      >
         {grid &&
           grid.map((rows, i) =>
             rows.map((col, k) => (
               <div
                 style={{
-                  width: 30,
-                  height: 30,
+                  width: 24,
+                  height: 24,
                   backgroundColor: grid[i][k] ? 'blue' : '',
                   border: '1px solid black',
                 }}
