@@ -1,7 +1,7 @@
 import './App.css'
 import React, { useState, useEffect, useRef } from 'react'
 
-const cols = 30
+const cols = 45
 const rows = 30
 
 const randomGrid = () => {
@@ -10,6 +10,18 @@ const randomGrid = () => {
     const row = []
     for (let j = 0; j < cols; j++) {
       row.push(Math.floor(Math.random() * 2))
+    }
+    grid.push(row)
+  }
+  return grid
+}
+
+const emptyGrid = () => {
+  const grid = []
+  for (let i = 0; i < rows; i++) {
+    const row = []
+    for (let j = 0; j < cols; j++) {
+      row.push(0)
     }
     grid.push(row)
   }
@@ -77,7 +89,7 @@ function App() {
           }
           setInterval(() => {
             runSimulation(grid)
-          }, 1000)
+          }, 500)
         }}
       >
         {start ? 'Stop' : 'Start'}
@@ -89,6 +101,13 @@ function App() {
       >
         Reset
       </button>
+      <button
+        onClick={() => {
+          setGrid(emptyGrid)
+        }}
+      >
+        Clear
+      </button>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {grid &&
           grid.map((rows, i) =>
@@ -97,7 +116,7 @@ function App() {
                 style={{
                   width: 30,
                   height: 30,
-                  backgroundColor: grid[i][k] ? 'green' : '',
+                  backgroundColor: grid[i][k] ? 'blue' : '',
                   border: '1px solid black',
                 }}
               />
