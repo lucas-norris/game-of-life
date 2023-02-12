@@ -16,6 +16,17 @@ const randomGrid = () => {
   return grid
 }
 
+const positions = [
+  [0, 1],
+  [0, -1],
+  [1, -1],
+  [-1, 1],
+  [1, 1],
+  [-1, -1],
+  [1, 0],
+  [-1, 0],
+]
+
 console.log(randomGrid())
 
 function App() {
@@ -24,6 +35,32 @@ function App() {
   useEffect(() => {
     setGrid(randomGrid())
   }, [])
+
+  function runSimulation() {
+    setGrid((g) => {
+      const next = g.map((row, i) => {
+        return row.map((cell, j) => {
+          let sum = 0
+          positions.forEach((element) => {
+            const x = i + element[0]
+            const y = j + element[1]
+            if (x >= 0 && x < rows && y >= 0 && y < cols) {
+              sum += g[x][y]
+            }
+          })
+          if (sum < 2 || sum > 3) {
+            return 0
+          }
+          if (sum === 3) {
+            return 1
+          }
+          return g[i][j]
+        })
+      })
+      return next
+    })
+  }
+
   return (
     <div className="App">
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
