@@ -1,5 +1,6 @@
 import './App.css'
 import React, { useState, useEffect, useRef } from 'react'
+import useInterval from './useInterval'
 
 const cols = 50
 const rows = 30
@@ -80,6 +81,10 @@ function App() {
       return next
     })
   }
+  useInterval(() => {
+    runSimulation(grid)
+    count += 1
+  }, 1000)
 
   return (
     <div className="App">
@@ -89,10 +94,6 @@ function App() {
           if (!start) {
             startRef.current = true
           }
-          setInterval(() => {
-            runSimulation(grid)
-            count += 1
-          }, 1000)
         }}
       >
         {start ? 'Stop' : 'Start'}
