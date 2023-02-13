@@ -28,6 +28,8 @@ const emptyGrid = () => {
   return grid
 }
 
+let count = 0
+
 const positions = [
   [0, 1],
   [0, -1],
@@ -89,7 +91,8 @@ function App() {
           }
           setInterval(() => {
             runSimulation(grid)
-          }, 500)
+            count += 1
+          }, 1000)
         }}
       >
         {start ? 'Stop' : 'Start'}
@@ -97,6 +100,7 @@ function App() {
       <button
         onClick={() => {
           setGrid(randomGrid)
+          count = 0
         }}
       >
         Reset
@@ -104,16 +108,19 @@ function App() {
       <button
         onClick={() => {
           setGrid(emptyGrid)
+          count = 0
         }}
       >
         Clear
       </button>
+      <p>{count}</p>
       <div
         style={{
           display: 'grid',
           gridTemplateColumns: `repeat(${cols}, 24px)`,
           width: 'fit-content',
           margin: '0 auto',
+          backgroundColor: 'lightblue',
         }}
       >
         {grid &&
