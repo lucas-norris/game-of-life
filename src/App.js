@@ -2,8 +2,8 @@ import './App.css'
 import React, { useState, useEffect, useRef } from 'react'
 import useInterval from './useInterval'
 
-const cols = 10
-const rows = 10
+const cols = 50
+const rows = 30
 
 const randomGrid = () => {
   const grid = []
@@ -12,8 +12,10 @@ const randomGrid = () => {
     for (let j = 0; j < cols; j++) {
       row.push(Math.floor(Math.random() * 2))
     }
+
     grid.push(row)
   }
+  cellCount = countLiveCells(grid)
   return grid
 }
 
@@ -26,6 +28,7 @@ const emptyGrid = () => {
     }
     grid.push(row)
   }
+  cellCount = countLiveCells(grid)
   return grid
 }
 
@@ -43,6 +46,18 @@ const positions = [
   [-1, 0],
 ]
 
+function countLiveCells(grid) {
+  let liveCellCount = 0
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      if (grid[i][j] === 1) {
+        liveCellCount += 1
+      }
+    }
+  }
+  return liveCellCount
+}
+
 console.log(randomGrid())
 
 function App() {
@@ -54,18 +69,6 @@ function App() {
   useEffect(() => {
     setGrid(randomGrid())
   }, [])
-
-  function countLiveCells(grid) {
-    let liveCellCount = 0
-    for (let i = 0; i < grid.length; i++) {
-      for (let j = 0; j < grid[i].length; j++) {
-        if (grid[i][j] === 1) {
-          liveCellCount += 1
-        }
-      }
-    }
-    return liveCellCount
-  }
 
   function runSimulation() {
     if (!startRef.current) {
