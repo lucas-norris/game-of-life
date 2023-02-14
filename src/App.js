@@ -80,10 +80,10 @@ function App() {
       })
       return next
     })
+    count += 1
   }
   useInterval(() => {
     runSimulation(grid)
-    count += 1
   }, 1000)
 
   return (
