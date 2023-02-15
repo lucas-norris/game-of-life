@@ -105,38 +105,13 @@ function App() {
 
   return (
     <div className="App">
-      <button
-        onClick={() => {
-          setStart(!start)
-          if (!start) {
-            startRef.current = true
-          }
-        }}
-      >
-        {start ? 'Stop' : 'Start'}
-      </button>
-      <button
-        onClick={() => {
-          setGrid(randomGrid)
-          count = 0
-        }}
-      >
-        Reset
-      </button>
-      <button
-        onClick={() => {
-          setGrid(emptyGrid)
-          count = 0
-        }}
-      >
-        Clear
-      </button>
-      <p>Generation:{count}</p>
-      <p>Alive Cells:{cellCount}</p>
+      <header className="App-header">
+        <h1>Game of Life</h1>
+      </header>
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: `repeat(${cols}, 24px)`,
+          gridTemplateColumns: `repeat(${cols}, 18px)`,
           width: 'fit-content',
           margin: '0 auto',
           backgroundColor: 'lightblue',
@@ -147,14 +122,44 @@ function App() {
             rows.map((col, k) => (
               <div
                 style={{
-                  width: 24,
-                  height: 24,
+                  width: 18,
+                  height: 18,
                   backgroundColor: grid[i][k] ? 'blue' : '',
                   border: '1px solid black',
                 }}
               />
             ))
           )}
+      </div>
+      <div>
+        <button
+          onClick={() => {
+            setStart(!start)
+            if (!start) {
+              startRef.current = true
+            }
+          }}
+        >
+          {start ? 'Pause' : 'Play'}
+        </button>
+        <button
+          onClick={() => {
+            setGrid(randomGrid)
+            count = 0
+          }}
+        >
+          Reset
+        </button>
+        <button
+          onClick={() => {
+            setGrid(emptyGrid)
+            count = 0
+          }}
+        >
+          Clear
+        </button>
+        <p>Generation:{count}</p>
+        <p>Alive Cells:{cellCount}</p>
       </div>
     </div>
   )
