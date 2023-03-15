@@ -19,6 +19,20 @@ const randomGrid = () => {
   return grid
 }
 
+// const tenPercentRandomGrid = () => {
+//   const grid = []
+//   for (let i = 0; i < rows; i++) {
+//     const row = []
+//     for (let j = 0; j < cols; j++) {
+//       row.push(Math.floor(Math.random() * 2))
+//     }
+
+//     grid.push(row)
+//   }
+//   cellCount = countLiveCells(grid)
+//   return grid
+// }
+
 const emptyGrid = () => {
   const grid = []
   for (let i = 0; i < rows; i++) {
@@ -65,6 +79,15 @@ function App() {
   const [start, setStart] = useState(false)
   const startRef = useRef(start)
   startRef.current = start
+
+  function handleClick(row, col) {
+    setGrid((g) => {
+      const next = [...g]
+      next[row][col] = 1 - g[row][col]
+      console.log(next)
+      return next
+    })
+  }
 
   useEffect(() => {
     setGrid(randomGrid())
@@ -127,6 +150,7 @@ function App() {
                   backgroundColor: grid[i][k] ? 'blue' : '',
                   border: '1px solid black',
                 }}
+                onClick={() => handleClick(i, k)}
               />
             ))
           )}
@@ -158,8 +182,10 @@ function App() {
         >
           Clear
         </button>
-        <p>Generation:{count}</p>
-        <p>Alive Cells:{cellCount}</p>
+        <div className="text">
+          <p>Generation:{count}</p>
+          <p>Alive Cells:{cellCount}</p>
+        </div>
       </div>
     </div>
   )
