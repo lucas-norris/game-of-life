@@ -81,10 +81,10 @@ function App() {
   startRef.current = start
 
   function handleClick(row, col) {
-    setGrid((g) => {
-      const next = [...g]
-      next[row][col] = 1 - g[row][col]
-      console.log(next)
+    setGrid((grid) => {
+      const next = [...grid]
+      next[row][col] = 1 - grid[row][col]
+      console.log(next[row][col])
       return next
     })
   }
@@ -144,13 +144,13 @@ function App() {
           grid.map((rows, i) =>
             rows.map((col, k) => (
               <div
+                onClick={() => handleClick(i, k)}
                 style={{
                   width: 18,
                   height: 18,
                   backgroundColor: grid[i][k] ? 'blue' : '',
                   border: '1px solid black',
                 }}
-                onClick={() => handleClick(i, k)}
               />
             ))
           )}

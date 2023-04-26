@@ -6,6 +6,8 @@
 .text{
   display: flex;
   justify-content: space-evenly;
+  color: hotpink;
+  font-size: 20px;
 }
 
 
