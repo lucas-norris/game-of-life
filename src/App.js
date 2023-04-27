@@ -82,8 +82,9 @@ function App() {
 
   function handleClick(row, col) {
     setGrid((grid) => {
-      const next = [...grid]
+      const next = grid.map((row) => [...row])
       next[row][col] = 1 - grid[row][col]
+      console.log(grid[row][col])
       console.log(next[row][col])
       return next
     })
@@ -144,6 +145,7 @@ function App() {
           grid.map((rows, i) =>
             rows.map((col, k) => (
               <div
+                key={`${i}-${k}`}
                 onClick={() => handleClick(i, k)}
                 style={{
                   width: 18,
