@@ -84,8 +84,7 @@ function App() {
     setGrid((grid) => {
       const next = grid.map((row) => [...row])
       next[row][col] = 1 - grid[row][col]
-      console.log(grid[row][col])
-      console.log(next[row][col])
+      cellCount = countLiveCells(next)
       return next
     })
   }
