@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   height: 100dvh;
+  background-color: #30384b;
 }
 
 .text{
@@ -12,7 +13,6 @@
 
 
 .App-header {
-  background-color: honeydew;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,7 +28,8 @@
 
 button{
   font-size: 30px;
-  color: hotpink
+  color: hotpink;
+  margin-right: 20px;
 }
 
 
